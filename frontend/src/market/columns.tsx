@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 // You can use a Zod schema here if you want.
 export type Seed = {
   ipAddress: string;
+  fileName: string;
   region: string;
   price: number;
 };
@@ -45,6 +46,20 @@ export const columns: ColumnDef<Seed>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           IP Address
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "fileName",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          File Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

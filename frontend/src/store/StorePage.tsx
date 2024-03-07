@@ -8,7 +8,7 @@ import "./store-page.css";
 
 const StorePage = () => {
   return (
-    <div id="store-page">
+    <div id="store-page" className="p-5 grow">
       <AddItemButton />
       <DataTable columns={columns} data={fakeItems} />
     </div>
