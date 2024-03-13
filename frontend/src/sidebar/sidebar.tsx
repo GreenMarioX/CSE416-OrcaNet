@@ -24,18 +24,18 @@ const Sidebar = () => {
   const isActive = (path: string) => location.pathname === path;
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-secondary border-r shadow-sm text-lg">
+      <nav className="h-full flex flex-col bg-card border-r shadow-sm text-lg">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
             src={orcanetLogo}
             className={`overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
             }`}
-            alt=""
+            alt="OrcaNet"
           />
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg  hover:bg-gray-600 bg-black"
+            className="p-1.5 rounded-lg  hover:bg-accent bg-black"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>

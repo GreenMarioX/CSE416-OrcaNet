@@ -58,9 +58,13 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  React.useEffect(() => {
+    table.setPageSize(3);
+  }, []);
+
   return (
     <div>
-      <div className="flex py-4">
+      {/* <div className="flex">
         <Input
           placeholder="Filter regions..."
           value={(table.getColumn("region")?.getFilterValue() as string) ?? ""}
@@ -70,7 +74,7 @@ export function DataTable<TData, TValue>({
           className="max-w-sm inline"
         />
         <Button type="submit">Filter</Button>
-      </div>
+      </div> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -125,7 +129,10 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.previousPage()}
+          onClick={() => {
+            console.log(table.getState());
+            table.previousPage();
+          }}
           disabled={!table.getCanPreviousPage()}
         >
           Previous
@@ -133,7 +140,11 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.nextPage()}
+          onClick={() => {
+            console.log(table.getState());
+            table.nextPage();
+            console.log(table.getState());
+          }}
           disabled={!table.getCanNextPage()}
         >
           Next

@@ -1,15 +1,11 @@
-import { DataTable } from "./DataTable";
-import { columns } from "./columns";
-
-import SearchBar from "./SearchBar";
-
-import fakeSeeds from "./fakeSeeds";
+import Sidebar from "./Sidebar";
+import JobPanel from "./JobPanel";
 
 const MarketPage = () => {
   return (
-    <div id="market-page" className="p-5 grow">
-      <SearchBar />
-      <DataTable columns={columns} data={fakeSeeds} />
+    <div id="market-page" className="relative grow bg-background">
+      <Sidebar />
+      <JobPanel />
     </div>
   );
 };

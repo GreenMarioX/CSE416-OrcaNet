@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div id="App" className="flex">
+      <div id="App" className="flex overflow-hidden">
         <Router>
           <Sidebar />
           <Routes>

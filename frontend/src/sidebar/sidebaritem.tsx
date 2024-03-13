@@ -24,15 +24,15 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           transition-colors group
           ${
             active
-              ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
-              : "hover:bg-indigo-50 text-muted-foreground"
+              ? "bg-gradient-to-tr from-secondary to-secondary text-secondary-foreground"
+              : "hover:bg-accent hover:text-accent-foreground text-muted-foreground"
           }
       `}
     >
       {icon}
       <span
         className={`overflow-hidden transition-all ${
-          expanded ? "w-36 ml-3" : "w-0"
+          expanded ? "w-30 ml-3" : "w-0" // <- This is where I change the width of the bar
         }`}
       >
         {text}
@@ -48,7 +48,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       {!expanded && (
         <div
           className={`
-            absolute left-full rounded-md px-2 py-1 ml-6
+            absolute left-full z-10 rounded-md px-2 py-1 ml-6
             bg-indigo-100 text-indigo-800 text-sm
             invisible opacity-20 -translate-x-3 transition-all
             group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
