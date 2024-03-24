@@ -1,19 +1,20 @@
 import { DataTable } from "./DataTable";
 import { columns } from "./columns";
+import fakeSeeds from "./fakeSeeds";
+
 import { Progress } from "@/components/ui/progress";
 
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
 import { Play, Pause, Trash2 } from "lucide-react";
 
-import fakeSeeds from "./fakeSeeds";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const JobPanel = () => {
   return (
     <ScrollArea className="absolute left-52 w-[calc(100%-13rem)] h-screen p-5 overflow-y-auto">
+      <MainCard />
       <TotalGraph />
       <ProgressCard />
-      <MainCard />
       <AddedPeers />
       <AddPeers />
     </ScrollArea>

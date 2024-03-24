@@ -1,12 +1,15 @@
 import HomePage from "./home/HomePage";
 import StorePage from "./store/StorePage";
 import MarketPage from "./market/MarketPage";
+import MarketPageAlt from "./market-alt/MarketPageAlt";
 import WalletPage from "./wallet/WalletPage";
 import SettingsPage from "./settings/SettingsPage";
 import Sidebar from "./sidebar/Sidebar";
 
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import "./App.css";
 
 function App() {
   return (
@@ -18,6 +21,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/store" element={<StorePage />} />
             <Route path="/market" element={<MarketPage />} />
+            <Route path="/market-alt" element={<MarketPageAlt />} />
             <Route path="/wallet" element={<WalletPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Routes>

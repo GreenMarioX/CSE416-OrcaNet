@@ -42,7 +42,7 @@ const Sidebar = () => {
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">
+          <ul className="flex-1 px-3 text-nowrap">
             <Link to="/">
               <SidebarItem
                 icon={<LayoutDashboard />}
@@ -64,6 +64,14 @@ const Sidebar = () => {
                 icon={<BarChart2 />}
                 text="Market"
                 active={isActive("/market")}
+                alert={false}
+              />
+            </Link>
+            <Link to="/market-alt">
+              <SidebarItem
+                icon={<BarChart2 />}
+                text="Market Alt"
+                active={isActive("/market-alt")}
                 alert={false}
               />
             </Link>

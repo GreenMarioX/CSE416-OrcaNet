@@ -1,5 +1,11 @@
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { Filter, Search, CircleDot, Scroll } from "lucide-react";
 
@@ -68,7 +74,7 @@ const JobList = (props: { filter: string }) => {
     },
     {
       id: "2",
-      fileName: "bestdogvideoever.mp4",
+      fileName: "bestdogvideoeverintheworld.mp4",
       fileSize: "1 gb",
       status: "paused",
     },
@@ -173,14 +179,40 @@ const Job = (props: {
       className="flex items-center m-2 bg-card rounded-lg "
       onClick={(e) => "loadJob"}
     >
-      <CircleDot
-        className={`${statusToColorCSS(
-          props.status
-        )} inline size-6 min-w-6 m-1`}
-      />
-      <div className="max-w-36 m-1">
-        <div className="overflow-hidden text-ellipsis">{props.fileName}</div>
-        <div className="overflow-hidden text-ellipsis">{props.fileSize}</div>
+      <div className="max-w-[11rem] m-1">
+        <div className="ml-2 overflow-hidden text-ellipsis">
+          {props.fileName}
+        </div>
+        <div className="flex items-center">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className={`lucide lucide-dot ${statusToColorCSS(
+                    props.status
+                  )}`}
+                >
+                  <circle cx="12" cy="12" r="2" />
+                </svg>
+              </TooltipTrigger>
+              <TooltipContent>
+                <div>{props.status}</div>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <span className="overflow-hidden text-ellipsis">
+            {props.fileSize}
+          </span>
+        </div>
       </div>
     </div>
   );
