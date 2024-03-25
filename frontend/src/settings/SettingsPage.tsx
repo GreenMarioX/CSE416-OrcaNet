@@ -6,60 +6,58 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { Switch } from "@/components/ui/switch";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+"use client"
+
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-
-import { Globe } from "lucide-react";
-
+import ProfileForm from "./ProfileForm";
+import PreferencesForm from "./PreferencesForm";
 const SettingsPage = () => {
   return (
     <div id="settings-page" className="p-5 grow">
-      <LanguageSetting />
-      <ToggleSetting
-        label="Notifications"
-        text="Enable desktop notifications"
-      />
-      <SaveFolderSetting />
-      <UploadRateSetting />
-      <DownloadRateSetting />
-      <SeedingLimitSetting />
-      <ThemeJSONSetting />
+      <DropMenus />
+      
     </div>
   );
 };
 
-const LanguageSetting = () => {
+const DropMenus = () => {
   return (
-    <div className="flex items-center mb-5">
-      <span className="whitespace-pre">Language </span>
-      <Globe />
-      <div className="ml-5">
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="English" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="en">English</SelectItem>
-            <SelectItem value="zh-TW">中文</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-};
+      <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+              <AccordionTrigger>Account Settings</AccordionTrigger>
+              <AccordionContent>
+                <ProfileForm />
+          </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+              <AccordionTrigger>Preferences</AccordionTrigger>
+              <AccordionContent>
+                <PreferencesForm />
+              </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+              <AccordionTrigger>Transfer Configurations</AccordionTrigger>
+              <AccordionContent>
+                <SaveFolderSetting />
+                <UploadRateSetting />
+                <DownloadRateSetting />
+                <SeedingLimitSetting />
+                <ThemeJSONSetting />
+              </AccordionContent>
+          </AccordionItem>
+      </Accordion>
 
-const ToggleSetting = (props: { label: string; text: string }) => {
-  return (
-    <div className="flex items-center mb-5">
-      <span>
-        <div>{props.label}</div>
-        <div className="text-sm">{props.text}</div>
-      </span>
-      <Switch className="justify-self-end ml-5" />
-    </div>
-  );
-};
+
+  )
+}
 
 const SaveFolderSetting = () => {
   return (
