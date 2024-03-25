@@ -21,6 +21,27 @@ const JobPanel = () => {
   );
 };
 
+const MainCard = () => {
+  return (
+    <div className="grid grid-cols-3 relative bg-card p-5 rounded">
+      <div>File Hash</div>
+      <div>7sjKLdskl18efMdkw3Hdne2</div>
+      <div></div>
+      <div>File Name</div>
+      <div>EdelGlad.png</div>
+      <div></div>
+      <div>File Size</div>
+      <div>2 mb</div>
+      <div></div>
+      <div className="absolute right-0 bottom-0 flex items-center mr-5 mb-5">
+        <Play className="size-10 hover:text-accent" />{" "}
+        <Pause className="size-10 hover:text-accent" />
+        <Trash2 className="size-10 hover:text-destructive" />
+      </div>
+    </div>
+  );
+};
+
 const TotalGraph = () => {
   const speedGraph = [
     { time: 0, speed: 0 },
@@ -55,26 +76,6 @@ const ProgressCard = () => {
       <Progress value={Math.floor((info.downloaded / info.total) * 100)} />
       <div>
         <div className="text-nowrap pl-5 text-lg">{`${info.downloaded} / ${info.total} Chunks`}</div>
-      </div>
-    </div>
-  );
-};
-
-const MainCard = () => {
-  return (
-    <div className="grid grid-cols-3 relative bg-card p-5">
-      <div>File Hash</div>
-      <div>7sjKLdskl18efMdkw3Hdne2</div>
-      <div></div>
-      <div>File Name</div>
-      <div>EdelGlad.png</div>
-      <div></div>
-      <div>File Size</div>
-      <div>2 mb</div>
-      <div></div>
-      <div className="absolute right-0 bottom-0 flex items-center mr-5 mb-5">
-        <Play className="size-10" /> <Pause className="size-10" />
-        <Trash2 className="size-10" />
       </div>
     </div>
   );
@@ -148,8 +149,9 @@ const AddedPeer = (props: {
         <div className="text-nowrap">{props.downloaded}</div>
       </div>
       <div className="flex">
-        <Play /> <Pause />
-        <Trash2 />
+        <Play className="hover:text-accent" />{" "}
+        <Pause className="hover:text-accent" />
+        <Trash2 className="hover:text-destructive" />
       </div>
     </div>
   );

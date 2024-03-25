@@ -7,18 +7,21 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { Filter, Search, CircleDot, Scroll } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MarketPageContext } from "./MarketPage";
 
-const Sidebar = () => {
+const Sidebar = (props: {
+  setJobID: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   // Consider nesting JobList under FilterInput for less movement
   const [filter, setFilter] = useState("");
   return (
     <div className="absolute left-0 top-0 w-52 h-screen border">
       <JobInput />
       <FilterInput setFilter={setFilter} />
-      <JobList filter={filter} />
+      <JobList filter={filter} setJobID={props.setJobID} />
     </div>
   );
 };
@@ -64,8 +67,11 @@ const FilterInput = (props: {
   );
 };
 
-const JobList = (props: { filter: string }) => {
-  const jobInfoList = [
+const JobList = (props: {
+  filter: string;
+  setJobID: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  const [jobInfoList, setJobInfoList] = useState([
     {
       id: "1",
       fileName: "image.png",
@@ -151,7 +157,7 @@ const JobList = (props: { filter: string }) => {
       fileSize: "28 mb",
       status: "downloading",
     },
-  ];
+  ]);
   let filteredList = jobInfoList;
   if (props.filter === "") {
     filteredList = jobInfoList;
@@ -163,7 +169,7 @@ const JobList = (props: { filter: string }) => {
   return (
     <ScrollArea className="w-52 h-[calc(100%-7rem)] overflow-y-auto">
       {filteredList.map((jobInfo, i) => (
-        <Job key={i} {...jobInfo} />
+        <Job key={i} {...jobInfo} setJobID={props.setJobID} />
       ))}
     </ScrollArea>
   );
@@ -173,11 +179,20 @@ const Job = (props: {
   fileName: string;
   fileSize: string;
   status: string;
+
+  setJobID: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const { jobID } = useContext(MarketPageContext);
   return (
+    // to implement: conditionally render different background component based off jobID for proper transitions
     <div
-      className="flex items-center m-2 bg-card rounded-lg "
-      onClick={(e) => "loadJob"}
+      className={`flex items-center m-2 rounded-lg 
+        ${
+          jobID == props.id
+            ? "bg-secondary"
+            : "bg-card hover:bg-accent hover:text-accent-foreground"
+        }`}
+      onClick={(e) => props.setJobID(props.id)}
     >
       <div className="max-w-[11rem] m-1">
         <div className="ml-2 overflow-hidden text-ellipsis">
@@ -194,9 +209,9 @@ const Job = (props: {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className={`lucide lucide-dot ${statusToColorCSS(
                     props.status
                   )}`}

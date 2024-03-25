@@ -19,44 +19,22 @@ import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { DataTable } from "./DataTable";
 import { columns } from "./columns";
 import fakeSeeds from "./fakeSeeds";
+import { createContext, useContext, useState } from "react";
+
+interface JobInfo {
+  id: string;
+  fileName: string;
+  fileSize: string;
+  status: string;
+  remainingTime: string;
+  timeQueued: string;
+}
+
+export const MarketPageAltContext = createContext({ jobID: "-1" });
 
 const MarketPageAlt = () => {
-  return (
-    <div id="market-page-alt" className="relative grow bg-background">
-      <Overview />
-      <Details />
-    </div>
-  );
-};
-
-export default MarketPageAlt;
-
-const Overview = () => {
-  return (
-    <div className="m-4">
-      <OverviewHeader />
-      <JobList />
-      <JobControls />
-    </div>
-  );
-};
-const OverviewHeader = () => {
-  return (
-    <div className="flex justify-between">
-      <div className="flex">
-        <Input placeholder="Filter..." className="w-80" />
-
-        <Button className="ml-2">All</Button>
-        <Button className="ml-2">Completed</Button>
-        <Button className="ml-2">Downloading</Button>
-        <Button className="ml-2">Paused</Button>
-      </div>
-      <Button>Add Job</Button>
-    </div>
-  );
-};
-const JobList = () => {
-  const jobInfoList = [
+  const [jobID, setJobID] = useState("-1");
+  const [jobInfoList, setJobInfoList] = useState<JobInfo[]>([
     {
       id: "1",
       fileName: "WhoLetTheDogsOut.mp4",
@@ -97,11 +75,109 @@ const JobList = () => {
       remainingTime: "2 min",
       timeQueued: "2024-03-23 16:29",
     },
-  ];
+  ]);
+  const updateJobStatus = (jobId: string, newStatus: string) => {
+    // Update job status in the state
+    setJobInfoList((prevJobInfoList) => {
+      return prevJobInfoList.map((job) => {
+        if (job.id === jobId) {
+          return { ...job, status: newStatus };
+        }
+        return job;
+      });
+    });
+  };
+  // Function to remove job from the list
+  const removeJob = (jobId: string) => {
+    // Remove job from the state
+    setJobInfoList((prevJobInfoList) =>
+      prevJobInfoList.filter((job) => job.id !== jobId)
+    );
+  };
+
+  return (
+    <MarketPageAltContext.Provider value={{ jobID }}>
+      <div id="market-page-alt" className="relative grow bg-background">
+        <Overview
+          jobID={jobID}
+          setJobID={setJobID}
+          jobInfoList={jobInfoList}
+          updateJobStatus={updateJobStatus}
+          removeJob={removeJob}
+        />
+        <Details />
+      </div>
+    </MarketPageAltContext.Provider>
+  );
+};
+
+export default MarketPageAlt;
+
+const Overview = (props: {
+  jobID: string;
+  setJobID: React.Dispatch<React.SetStateAction<string>>;
+  jobInfoList: JobInfo[];
+  updateJobStatus: (jobId: string, newStatus: string) => void;
+  removeJob: (jobId: string) => void;
+}) => {
+  const [filter, setFilter] = useState<string>("all");
+  return (
+    <div className="m-4">
+      <OverviewHeader setFilter={setFilter} />
+      <JobList
+        jobInfoList={props.jobInfoList}
+        setJobID={props.setJobID}
+        filter={filter}
+      />
+      <JobControls
+        jobID={props.jobID}
+        updateJobStatus={props.updateJobStatus}
+        removeJob={props.removeJob}
+      />
+    </div>
+  );
+};
+const OverviewHeader = (props: {
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  const handleFilter = (status: string) => {
+    props.setFilter(status);
+  };
+  return (
+    <div className="flex justify-between">
+      <div className="flex">
+        <Input placeholder="Filter..." className="w-80" />
+
+        <Button className="ml-2" onClick={() => handleFilter("all")}>
+          All
+        </Button>
+        <Button className="ml-2" onClick={() => handleFilter("downloading")}>
+          Downloading
+        </Button>
+        <Button className="ml-2" onClick={() => handleFilter("paused")}>
+          Paused
+        </Button>
+        <Button className="ml-2" onClick={() => handleFilter("error")}>
+          Error
+        </Button>
+      </div>
+      <Button>Add Job</Button>
+    </div>
+  );
+};
+const JobList = (props: {
+  jobInfoList: JobInfo[];
+  setJobID: React.Dispatch<React.SetStateAction<string>>;
+  filter: string;
+}) => {
+  const filteredJobs =
+    props.filter === "all"
+      ? props.jobInfoList
+      : props.jobInfoList.filter((job) => job.status === props.filter);
   return (
     <ul>
-      {jobInfoList.map((e) => (
-        <Job key={e.id} {...e} />
+      {filteredJobs.map((e) => (
+        <Job key={e.id} {...e} setJobID={props.setJobID} />
       ))}
     </ul>
   );
@@ -113,9 +189,20 @@ const Job = (props: {
   status: string;
   remainingTime: string;
   timeQueued: string;
+
+  setJobID: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const { jobID } = useContext(MarketPageAltContext);
+
   return (
-    <li className="flex items-center justify-between p-1 m-2 rounded bg-card">
+    <li
+      className={`flex items-center justify-between p-1 m-2 rounded ${
+        jobID == props.id
+          ? "bg-secondary"
+          : "bg-card hover:bg-accent hover:text-accent-foreground"
+      }`}
+      onClick={(e) => props.setJobID(props.id)}
+    >
       <div className="flex items-center">
         <TooltipProvider>
           <Tooltip>
@@ -127,9 +214,9 @@ const Job = (props: {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className={`lucide lucide-dot ${statusToColorCSS(
                   props.status
                 )}`}
@@ -150,13 +237,34 @@ const Job = (props: {
     </li>
   );
 };
-const JobControls = () => {
+const JobControls = (props: {
+  jobID: string;
+  updateJobStatus: (jobId: string, newStatus: string) => void;
+  removeJob: (jobId: string) => void;
+}) => {
+  const handlePlayClick = () => {
+    props.updateJobStatus(props.jobID, "downloading");
+  };
+
+  const handlePauseClick = () => {
+    props.updateJobStatus(props.jobID, "paused");
+  };
+
+  const handleDeleteClick = () => {
+    props.removeJob(props.jobID);
+  };
   return (
     <div className="flex items-center p-4">
       <div className="mr-4">3 jobs selected</div>
-      <Play className="size-8" />
-      <Pause className="size-8" />
-      <Trash2 className="size-8" />
+      <button onClick={handlePlayClick}>
+        <Play className="size-8 hover:text-accent" />
+      </button>
+      <button onClick={handlePauseClick}>
+        <Pause className="size-8 hover:text-accent" />
+      </button>
+      <button onClick={handleDeleteClick}>
+        <Trash2 className="size-8 hover:text-destructive" />
+      </button>
     </div>
   );
 };
@@ -290,8 +398,9 @@ const SelectedPeer = (props: {
             <div>{props.price}</div>
             <div>{props.amountDownloaded}</div>
             <div className="flex">
-              <Play /> <Pause />
-              <Trash2 />
+              <Play className="hover:text-accent" />
+              <Pause className="hover:text-accent" />
+              <Trash2 className="hover:text-destructive" />
             </div>
           </div>
         </AccordionTrigger>
