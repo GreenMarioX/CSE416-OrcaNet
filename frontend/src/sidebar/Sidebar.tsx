@@ -22,6 +22,19 @@ const Sidebar = () => {
   const [expanded, setExpanded] = useState(true);
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+
+  const isSettingsAltActive = () => {
+    const paths = [
+      "/settings-alt",
+      "/settings-alt/profile",
+      "/settings-alt/account",
+      "/settings-alt/appearance",
+      "/settings-alt/notifications",
+      "/settings-alt/display",
+    ];
+    return paths.some(path => isActive(path));
+  };
+
   return (
     <aside className="h-screen">
       <nav className="h-full flex flex-col bg-card border-r shadow-sm text-lg">
@@ -88,6 +101,14 @@ const Sidebar = () => {
                 icon={<Settings />}
                 text="Settings"
                 active={isActive("/settings")}
+                alert={false}
+              />
+            </Link>
+            <Link to="/settings-alt/profile">
+              <SidebarItem
+                icon={<Settings />}
+                text="Settings Alt"
+                active={isSettingsAltActive()}
                 alert={false}
               />
             </Link>

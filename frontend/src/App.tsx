@@ -5,6 +5,12 @@ import MarketPageAlt from "./market-alt/MarketPageAlt";
 import WalletPage from "./wallet/WalletPage";
 import SettingsPage from "./settings/SettingsPage";
 import Sidebar from "./sidebar/Sidebar";
+import SettingsPageAlt from "./settings-alt/SettingsPageAlt";
+import ProfilePage from "./settings-alt/profile/ProfilePage";
+import AccountPage from "./settings-alt/account/AccountPage";
+import AppearancePage from "./settings-alt/appearance/AppearancePage";
+import NotificationsPage from "./settings-alt/notifications/NotificationPage";
+import DisplayPage from "./settings-alt/display/DisplayPage";
 
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -24,6 +30,13 @@ function App() {
             <Route path="/market-alt" element={<MarketPageAlt />} />
             <Route path="/wallet" element={<WalletPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/settings-alt" element={<SettingsPageAlt />}>
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="account" element={<AccountPage />} />
+              <Route path="appearance" element={<AppearancePage />} />
+              <Route path="notifications" element={<NotificationsPage />} />
+              <Route path="display" element={<DisplayPage />} />
+            </Route>
           </Routes>
         </Router>
       </div>
