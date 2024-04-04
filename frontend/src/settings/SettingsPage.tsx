@@ -1,121 +1,74 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import React from 'react';
+import { Separator } from "@/components/ui/separator"
+import { SidebarNav } from "./components/SidebarNav"
+import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
+const sidebarNavItems = [
+  {
+    title: "Profile",
+    href: "/settings/profile",
+  },
+  {
+    title: "Account",
+    href: "/settings/account",
+  },
+  {
+    title: "Appearance",
+    href: "/settings/appearance",
+  },
+  {
+    title: "Notifications",
+    href: "/settings/notifications",
+  },
+  {
+    title: "Display",
+    href: "/settings/display",
+  },
+  {
+    title: "Transfer",
+    href: "/settings/transfer",
+  },
+]
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-
-"use client"
-
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import ProfileForm from "./ProfileForm";
-import PreferencesForm from "./PreferencesForm";
-const SettingsPage = () => {
-  return (
-    <div id="settings-page" className="p-5 grow">
-      <DropMenus />
-      
-    </div>
-  );
-};
-
-const DropMenus = () => {
-  return (
-      <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-              <AccordionTrigger>Account Settings</AccordionTrigger>
-              <AccordionContent>
-                <ProfileForm />
-          </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-              <AccordionTrigger>Preferences</AccordionTrigger>
-              <AccordionContent>
-                <PreferencesForm />
-              </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-              <AccordionTrigger>Transfer Configurations</AccordionTrigger>
-              <AccordionContent>
-                <SaveFolderSetting />
-                <UploadRateSetting />
-                <DownloadRateSetting />
-                <SeedingLimitSetting />
-                <ThemeJSONSetting />
-              </AccordionContent>
-          </AccordionItem>
-      </Accordion>
-
-
-  )
+interface SettingsLayoutProps {
+  children: React.ReactNode;
 }
 
-const SaveFolderSetting = () => {
+export default function SettingsPage() {
   return (
-    <div className="flex items-center mb-5">
-      <span>Default save folder</span>
-      <Input type="text" className="ml-5 w-96" placeholder="\store\" />
-    </div>
-  );
-};
+    <>
+      <div className="md:hidden">
+      <img
+          src="/examples/forms-light.png"
+          width="1280"
+          height="791"
+          alt="Forms"
+          className="block dark:hidden"
+        />
+        <img
+          src="/examples/forms-dark.png"
+          width="1280"
+          height="791"
+          alt="Forms"
+          className="hidden dark:block"
+        />
+      </div>
+      <div className="hidden space-y-6 p-10 pb-16 md:block">
+        <div className="space-y-0.5">
+          <h2 className="text-2xl font-bold tracking-tight">OrcaNet Settings</h2>
+          <p className="text-muted-foreground">
+            Manage your account settings and set e-mail preferences.
+          </p>
+        </div>
+        <Separator className="my-6" />
+        <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
+          <aside className="-mx-4 lg:w-1/5">
+            <SidebarNav items={sidebarNavItems} />
+          </aside>
+          <Outlet />
 
-const UploadRateSetting = () => {
-  return (
-    <div className="flex items-center mb-5">
-      <span>Upload Rate Limit</span>
-      <Input type="text" className="ml-5 w-24 text-end" placeholder="10" />{" "}
-      <span className="ml-2">KiB/s</span>
-    </div>
-  );
-};
-
-const DownloadRateSetting = () => {
-  return (
-    <div className="flex items-center mb-5">
-      <span>Download Rate Limit</span>
-      <Input type="text" className="ml-5 w-24 text-end" placeholder="10" />{" "}
-      <span className="ml-2">KiB/s</span>
-    </div>
-  );
-};
-
-const SeedingLimitSetting = () => {
-  return (
-    <div className="flex items-center mb-5">
-      <span>Seeding Ratio Limit</span>
-      <Input type="text" className="ml-5 w-24 text-end" placeholder="1" />{" "}
-    </div>
-  );
-};
-const ThemeJSONSetting = () => {
-  return (
-    <div className="mb-5">
-      <div className="mb-2">Paste JSON Theme Configuration</div>
-      <Textarea className="w-[32rem]" />
-    </div>
-  );
-};
-
-export default SettingsPage;
-
-/*
-Settings:
-  Language
-  Notifications on off
-  Dark Mode/Light Mode
-  Default Save Path
-  Upload rate limit
-  Download rate limit
-  Seeding
-	limit when ratio reaches
-  Theme Json
-*/
+          
+        </div>
+      </div>
+    </>
+  )
+}

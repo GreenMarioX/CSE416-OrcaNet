@@ -209,7 +209,7 @@ export function NotificationsForm() {
                 </FormLabel>
                 <FormDescription>
                   You can manage your name in the{" "}
-                  <Link to="/settings-alt/account" style={{ textDecoration: 'underline' }}>account settings</Link> page.
+                  <Link to="/settings/account" style={{ textDecoration: 'underline' }}>account settings</Link> page.
                 </FormDescription>
               </div>
             </FormItem>

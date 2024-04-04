@@ -123,7 +123,7 @@ export function ProfileForm() {
               </Select>
               <FormDescription>
                 You can manage verified email addresses in your{" "}
-                <a href="/settings-alt/account" style={{ textDecoration: 'underline' }}>account settings</a>.
+                <a href="/settings/account" style={{ textDecoration: 'underline' }}>account settings</a>.
               </FormDescription>
               <FormMessage />
             </FormItem>

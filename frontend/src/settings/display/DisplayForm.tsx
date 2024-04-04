@@ -43,8 +43,8 @@ const items = [
     label: "Market Alt",
   },
   {
-    id: "settings alt",
-    label: "Settings alt",
+    id: "settings",
+    label: "Settings",
   },
 ] as const
 

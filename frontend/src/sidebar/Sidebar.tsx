@@ -23,14 +23,15 @@ const Sidebar = () => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
 
-  const isSettingsAltActive = () => {
+  const isSettingsActive = () => {
     const paths = [
-      "/settings-alt",
-      "/settings-alt/profile",
-      "/settings-alt/account",
-      "/settings-alt/appearance",
-      "/settings-alt/notifications",
-      "/settings-alt/display",
+      "/settings",
+      "/settings/profile",
+      "/settings/account",
+      "/settings/appearance",
+      "/settings/notifications",
+      "/settings/display",
+      "/settings/transfer",
     ];
     return paths.some(path => isActive(path));
   };
@@ -96,19 +97,11 @@ const Sidebar = () => {
                 alert={false}
               />
             </Link>
-            <Link to="/settings">
+            <Link to="/settings/profile">
               <SidebarItem
                 icon={<Settings />}
                 text="Settings"
-                active={isActive("/settings")}
-                alert={false}
-              />
-            </Link>
-            <Link to="/settings-alt/profile">
-              <SidebarItem
-                icon={<Settings />}
-                text="Settings Alt"
-                active={isSettingsAltActive()}
+                active={isSettingsActive()}
                 alert={false}
               />
             </Link>

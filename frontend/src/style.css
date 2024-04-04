@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* --background: hsl(0 0% 100%);
+    --background: hsl(0 0% 100%);
     --foreground: hsl(224 71.4% 4.1%);
     --card: hsl(0 0% 100%);
     --card-foreground: hsl(224 71.4% 4.1%);
@@ -22,7 +22,7 @@
     --destructive-foreground: hsl(210 20% 98%);
     --border: hsl(220 13% 91%);
     --input: hsl(220 13% 91%);
-    --ring: hsl(262.1 83.3% 57.8%); */
+    --ring: hsl(262.1 83.3% 57.8%); 
     --radius: 0.5rem;
   }
 

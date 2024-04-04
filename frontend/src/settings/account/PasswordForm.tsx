@@ -5,7 +5,16 @@ import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-   
+import React, { useState } from 'react';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+  
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -33,7 +42,7 @@ const formSchema = z.object({
     }),
 })
 
-export function ProfileForm() {
+export function PasswordForm() {
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -53,26 +62,13 @@ export function ProfileForm() {
     }
 
     return (
-        <Form {...form}>
+        <Dialog>
+  <DialogTrigger>Change Password</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Change Password</DialogTitle>
+      <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="username"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Username</FormLabel>
-                            <FormControl>
-                                <Input className="w-96" placeholder="Username" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                This is your public display name.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-              
-                    )}
-                />
-
                 <FormField
                     control={form.control}
                     name="oldpassword"
@@ -90,7 +86,6 @@ export function ProfileForm() {
               
                     )}
                 />
-
                 <FormField
                     control={form.control}
                     name="newpassword"
@@ -125,16 +120,19 @@ export function ProfileForm() {
                         </FormItem>
                     )}
                 />
-                <div className="mb-5">
-                    <div className="mb-2">Enter your profile description</div>
-                        <Textarea className="w-[32rem]" />
-                </div>
-
           <Button type="submit">Submit</Button>
         </form>
       </Form>
+      <DialogDescription>
+        This action cannot be undone. This will change your password. To change again, resubmit this form.
+        Your old password cannot be used again.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+
+        
     )
 }
 
-
-export default ProfileForm;
+export default PasswordForm;
