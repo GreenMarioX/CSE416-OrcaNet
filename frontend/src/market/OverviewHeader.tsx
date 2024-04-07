@@ -83,8 +83,9 @@ const AddJob = (props: { addJob: (hash: string) => void }) => {
             onKeyUp={(e) => {
               if (e.key === "Enter") {
                 props.addJob(buffer);
+                setBuffer("");
+                setActive(false);
               }
-              setActive(false);
             }}
             placeholder="Filter..."
           />
@@ -92,6 +93,7 @@ const AddJob = (props: { addJob: (hash: string) => void }) => {
             className="absolute right-2 top-2"
             onClick={(e) => {
               props.addJob(buffer);
+              setBuffer("");
               setActive(false);
             }}
           />
