@@ -33,23 +33,30 @@ const Sidebar = () => {
       "/settings/display",
       "/settings/transfer",
     ];
-    return paths.some(path => isActive(path));
+    return paths.some((path) => isActive(path));
   };
 
   return (
     <aside className="h-screen">
       <nav className="h-full flex flex-col bg-card border-r shadow-sm text-lg">
         <div className="p-4 pb-2 flex justify-between items-center">
-          <img
+          {/* <img
             src={orcanetLogo}
             className={`overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
             }`}
             alt="OrcaNet"
-          />
+          /> */}
+          <div
+            className={`font-bold text-3xl overflow-hidden transition-all ${
+              expanded ? "w-32" : "w-0"
+            }`}
+          >
+            OrcaNet
+          </div>
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg  hover:bg-accent bg-black"
+            className="p-1.5 rounded-lg  hover:bg-gray-300 bg-gray-200 text-foreground"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
@@ -78,14 +85,6 @@ const Sidebar = () => {
                 icon={<BarChart2 />}
                 text="Market"
                 active={isActive("/market")}
-                alert={false}
-              />
-            </Link>
-            <Link to="/market-alt">
-              <SidebarItem
-                icon={<BarChart2 />}
-                text="Market Alt"
-                active={isActive("/market-alt")}
                 alert={false}
               />
             </Link>
