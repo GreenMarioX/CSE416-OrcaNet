@@ -10,7 +10,7 @@ import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { DataTable } from "./DataTable";
 import { columns } from "./columns";
 import fakeSeeds from "./fakeSeeds";
-import { Card } from "@/components/ui/card";
+import { GeneralInfoPanel } from "./GeneralInfoPanel";
 
 const Details = () => {
   return (
@@ -23,30 +23,6 @@ const Details = () => {
 
 export default Details;
 
-const GeneralInfoPanel = () => {
-  const speedGraph = [
-    { time: 0, speed: 0 },
-    { time: 1, speed: 8 },
-    { time: 2, speed: 12 },
-    { time: 3, speed: 14 },
-    { time: 4, speed: 14 },
-    { time: 5, speed: 14 },
-  ];
-  return (
-    <Card className="bg-card rounded p-4">
-      <div>File Hash</div>
-      <div>47 / 185 MiB</div>
-      <div>Running Cost: 10 USD</div>
-      <div>Projected Cost: 20 USD</div>
-      <LineChart width={300} height={150} data={speedGraph} className="">
-        <Line type="monotone" dataKey="speed" stroke="var(--primary)" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis />
-        <YAxis />
-      </LineChart>
-    </Card>
-  );
-};
 const PeerPanel = () => {
   return (
     <div>

@@ -254,8 +254,8 @@ const Job = (props: {
     <li
       className={`flex items-center justify-between p-2 mb-2 rounded ${
         selectedJobs.includes(props.id)
-          ? "bg-gray-200"
-          : "bg-gray-50 hover:bg-accent hover:text-accent-foreground"
+          ? "bg-gray-200 dark:bg-gray-600"
+          : "bg-gray-50 hover:bg-accent hover:text-accent-foreground dark:bg-gray-900 dark:hover:bg-gray-800"
       }`}
       onClick={(e) => {
         if (e.ctrlKey) {

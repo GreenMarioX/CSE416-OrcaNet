@@ -56,7 +56,7 @@ const Sidebar = () => {
           </div>
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg  hover:bg-gray-300 bg-gray-200 text-foreground"
+            className="p-1.5 rounded-lg  hover:bg-gray-300 bg-gray-200 dark:bg-gray-600 text-foreground"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
