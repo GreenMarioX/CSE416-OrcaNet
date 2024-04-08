@@ -41,6 +41,9 @@ export const GeneralInfoPanel = (props: { jobInfo: JobInfo }) => {
         <div>Projected Cost: {props.jobInfo.projectedCost}</div>
         <div>ETA: {props.jobInfo.remainingTime}</div>
       </div>
+      <div className="text-right text-sm rounded-b-lg bg-gray-500 text-gray-100">
+        <div className="mr-2">{props.jobInfo.timeQueued}</div>
+      </div>
     </Card>
   );
 };
