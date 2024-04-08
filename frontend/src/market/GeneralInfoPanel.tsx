@@ -1,8 +1,9 @@
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { Card } from "@/components/ui/card";
 import { CopyIcon } from "lucide-react";
+import { JobInfo } from "./MarketPage";
 
-export const GeneralInfoPanel = () => {
+export const GeneralInfoPanel = (props: { jobInfo: JobInfo }) => {
   const speedGraph = [
     { time: 0, speed: 0 },
     { time: 1, speed: 8 },
@@ -14,19 +15,31 @@ export const GeneralInfoPanel = () => {
   return (
     <Card className="">
       <div className="flex justify-between rounded-t-lg bg-gray-300 text-gray-800">
-        <div className="ml-2">File Hash</div>
-        <CopyIcon className="mr-2" />
+        <div className="ml-2">{props.jobInfo.hash}</div>
+        <CopyIcon
+          onClick={async (e) => {
+            try {
+              await navigator.clipboard.writeText(props.jobInfo.hash);
+              alert("Text copied to clipboard!");
+            } catch (err) {
+              alert("Failed to copy text");
+            }
+          }}
+          className="mr-2"
+        />
       </div>
       <div className="p-3 text-lg">
-        <div className="mb-1">WhoLetTheDogsOut.mp4</div>
+        <div className="mb-1">{props.jobInfo.fileName}</div>
         <div>
-          <span className="text-blue-600">47</span> / 185 MiB
+          <span className="text-blue-600">{props.jobInfo.accumulatedData}</span>{" "}
+          / {props.jobInfo.fileSize}
         </div>
         <div>
-          Running Cost: <span className="text-blue-600">10 USD</span>
+          Running Cost:{" "}
+          <span className="text-blue-600">{props.jobInfo.runningCost}</span>
         </div>
-        <div>Projected Cost: 20 USD</div>
-        <div>ETA: 10 s</div>
+        <div>Projected Cost: {props.jobInfo.projectedCost}</div>
+        <div>ETA: {props.jobInfo.remainingTime}</div>
       </div>
     </Card>
   );

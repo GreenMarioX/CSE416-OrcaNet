@@ -50,7 +50,7 @@ export const JobListHeader = (props: {
         </div>
       </div>
       <div
-        className="w-[4rem] flex items-center justify-center"
+        className="w-[4.5rem] flex items-center justify-center"
         onClick={(e) => {
           props.setSortOrder((prev) => {
             const poppedSort = prev.splice(
@@ -300,7 +300,7 @@ const Job = (props: {
         </TooltipProvider>
         <div>{props.fileName}</div>
       </div>
-      <div className="w-[4rem] text-right">{props.fileSize}</div>
+      <div className="w-[4.5rem] text-right">{props.fileSize}</div>
       <div className="w-16 text-right">{props.remainingTime}</div>
       <div className="w-[9.5rem] text-right">{props.timeQueued}</div>
     </li>
@@ -348,7 +348,7 @@ function statusToColorCSS(status: JobStatus): string {
     case "error":
       return "stroke-red-500";
     case "completed":
-      return "stroke-black";
+      return "stroke-black dark:stroke-white";
     default:
       return "";
   }

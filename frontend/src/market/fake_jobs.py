@@ -1,4 +1,5 @@
 import random
+import hashlib
 
 file_exts = ["mp4", "mp3", "docx", "pptx", "xlsx", "pdf", "py", "rs"]
 file_size_units = ["KiB", "MiB", "GiB", "TiB"]
@@ -24,11 +25,22 @@ def main():
   output = "["
   for i in range(num):
     id = i + 1
+    size = random.randint(1, 1023)
+    unit = random.choice(file_size_units)
     file_name = f'{rand_name()}.{random.choice(file_exts)}'
-    file_size = f'{random.randint(1, 1023)} {random.choice(file_size_units)}'
+    file_size = f'{size} {unit}'
     status = random.choice(file_statuses)
     remaining_time = f'{random.randint(1, 23)} {random.choice(file_time_units)}'
     time_queued = rand_date()
+
+    p_cost = random.randint(3, 29)
+    r_cost = random.randint(0, p_cost)
+    hash_obj = hashlib.sha256()
+    hash_obj.update(file_name.encode())
+    hash = hash_obj.hexdigest()
+    accumulated_data = f'{random.randint(0, size)}'
+    running_cost = f'{r_cost} USD'
+    projected_cost = f'{p_cost} USD'
 
     text = " {"
     text += f'id:"{id}",'
@@ -36,7 +48,12 @@ def main():
     text += f'fileSize:"{file_size}",'
     text += f'status:"{status}",'
     text += f'remainingTime:"{remaining_time}",'
-    text += f'timeQueued:"{time_queued}"'
+    text += f'timeQueued:"{time_queued}",'
+
+    text += f'hash:"{hash[:16]}",'
+    text += f'accumulatedData:"{accumulated_data}",'
+    text += f'runningCost:"{running_cost}",'
+    text += f'projectedCost:"{projected_cost}",'
     text += "},"
 
     output += text

@@ -10,6 +10,11 @@ export interface JobInfo {
   status: JobStatus;
   remainingTime: string;
   timeQueued: string;
+
+  hash: string;
+  accumulatedData: string;
+  runningCost: string;
+  projectedCost: string;
 }
 export type JobStatus = "downloading" | "paused" | "error" | "completed";
 
@@ -49,7 +54,7 @@ const MarketPage = () => {
       newList.push({
         id: (parseInt(prev[prev.length - 1].id) + 1).toString(),
         fileName: `new_job${parseInt(prev[prev.length - 1].id) + 1}.json`,
-        fileSize: Math.floor(Math.random() * 10) + 1 + " KiB",
+        fileSize: 10 + Math.floor(Math.random() * 10) + 1 + " KiB",
         status: "paused",
         remainingTime: Math.floor(Math.random() * 10) + 1 + " s",
         timeQueued: `${("0000" + date.getFullYear()).slice(-4)}-${(
@@ -59,6 +64,10 @@ const MarketPage = () => {
         ).slice(-2)}:${("00" + date.getMinutes()).slice(-2)}:${(
           "00" + date.getSeconds()
         ).slice(-2)}`,
+        hash: `NeW_jOB${parseInt(prev[prev.length - 1].id) + 1}.jSoN`,
+        accumulatedData: Math.floor(Math.random() * 10) + 1 + " KiB",
+        runningCost: Math.floor(Math.random() * 10) + 1 + " USD",
+        projectedCost: 10 + Math.floor(Math.random() * 10) + 1 + " USD",
       });
       return newList;
     });
@@ -74,7 +83,25 @@ const MarketPage = () => {
           removeJobs={removeJobs}
           addJob={addJob}
         />
-        <Details />
+        <Details
+          jobInfo={
+            selectedJobs.length > 0
+              ? jobInfoList.filter((e) => e.id === selectedJobs[0])[0]
+              : {
+                  id: "-1",
+                  fileName: "MissingNo",
+                  fileSize: "-1 KiB",
+                  status: "completed",
+                  remainingTime: "-1 s",
+                  timeQueued: "9999-99-99 99:99:99",
+
+                  hash: "OnGnIsSiM",
+                  accumulatedData: "-1",
+                  runningCost: "-1 USD",
+                  projectedCost: "-1 USD",
+                }
+          }
+        />
       </div>
     </MarketPageContext.Provider>
   );
