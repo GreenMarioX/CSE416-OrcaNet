@@ -13,6 +13,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogFooter,
 } from "@/components/ui/dialog"
   
 import { Button } from "@/components/ui/button"
@@ -26,7 +27,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-
+import { toast } from "@/components/ui/use-toast"
 const formSchema = z.object({
     username: z.string().min(2, {
         message: "Username must be at least 3 characters.",
@@ -59,11 +60,15 @@ export function PasswordForm() {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+        toast({
+            title: "Password Notification",
+            description: "Your password has successfully been updated! A confirmation email has been sent to your email address.",
+          })
     }
 
     return (
         <Dialog>
-  <DialogTrigger>Change Password</DialogTrigger>
+  <DialogTrigger asChild><Button variant="outline">Change Password</Button></DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Change Password</DialogTitle>
@@ -120,7 +125,8 @@ export function PasswordForm() {
                         </FormItem>
                     )}
                 />
-          <Button type="submit">Submit</Button>
+                <Button>Submit</Button>
+          
         </form>
       </Form>
       <DialogDescription>

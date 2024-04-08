@@ -12,10 +12,10 @@ const Overview = (props: {
   const [filter, setFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState([
+    ["timeQueued", "descending"],
     ["name", "descending"],
     ["size", "descending"],
     ["eta", "descending"],
-    ["timeQueued", "descending"],
   ]);
   return (
     <div className="">

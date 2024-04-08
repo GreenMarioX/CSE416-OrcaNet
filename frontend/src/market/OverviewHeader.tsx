@@ -14,6 +14,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { DataTable } from "./DataTable";
 import fakeSeeds from "./fakeSeeds";
 import { Seed2, columns2 } from "./columns";
+import { toast } from "@/components/ui/use-toast";
 const OverviewHeader = (props: {
   setFilter: React.Dispatch<React.SetStateAction<string>>;
   setStatusFilter: React.Dispatch<React.SetStateAction<string>>;
@@ -107,8 +108,11 @@ const AddJob = (props: { addJob: (hash: string) => void }) => {
   };
 
   const handleAddJob = () => {
-
     props.addJob(buffer);
+    toast({
+      title: "Job Successfully Added!",
+      description: "Your job has been successfully added!",
+    })
   }
 
   return (

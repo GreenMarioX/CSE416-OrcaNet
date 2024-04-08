@@ -55,7 +55,7 @@ const MarketPage = () => {
         id: (parseInt(prev[prev.length - 1].id) + 1).toString(),
         fileName: `new_job${parseInt(prev[prev.length - 1].id) + 1}.json`,
         fileSize: 10 + Math.floor(Math.random() * 10) + 1 + " KiB",
-        status: "paused",
+        status: "downloading",
         remainingTime: Math.floor(Math.random() * 10) + 1 + " s",
         timeQueued: `${("0000" + date.getFullYear()).slice(-4)}-${(
           "00" + date.getMonth()

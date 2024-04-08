@@ -8,7 +8,7 @@ import { Play, Pause, Trash2, MoveUpIcon, MoveDownIcon } from "lucide-react";
 import { useContext } from "react";
 import { JobInfo, JobStatus, MarketPageContext } from "./MarketPage";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { toast } from "@/components/ui/use-toast";
 export const JobListHeader = (props: {
   sortOrder: string[][];
   setSortOrder: React.Dispatch<React.SetStateAction<string[][]>>;
@@ -322,18 +322,32 @@ export const JobControls = (props: {
       <button
         onClick={() => {
           props.updateJobStatuses("downloading");
+          toast({
+            title: "File Download Resumed",
+            description: "The file download has been resumed.",
+          })
         }}
       >
         <Play className="size-6 text-gray-500 hover:text-gray-800" />
       </button>
       <button
         onClick={() => {
-          props.updateJobStatuses("paused");
+          props.updateJobStatuses("paused")
+          toast({
+            title: "File Download Paused",
+            description: "The file download has been paused.",
+          })
         }}
       >
         <Pause className="size-6 text-gray-500 hover:text-gray-800" />
       </button>
-      <button onClick={props.removeJobs}>
+      <button onClick={() => {props.removeJobs
+        toast({
+          variant: "destructive",
+          title: "File Download Cancelled",
+          description: "The file download has been cancelled.",
+        })
+      }}>
         <Trash2 className="size-6 text-gray-500 hover:text-destructive" />
       </button>
     </div>

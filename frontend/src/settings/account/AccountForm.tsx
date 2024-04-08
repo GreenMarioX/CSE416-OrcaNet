@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
 import { PasswordForm } from "./PasswordForm"
+import React, { useState } from 'react';
 const languages = [
   { label: "English", value: "en" },
   { label: "French", value: "fr" },
@@ -55,9 +56,9 @@ const accountFormSchema = z.object({
     .max(30, {
       message: "Name must not be longer than 30 characters.",
     }),
-  dob: z.date({
-    required_error: "A date of birth is required.",
-  }),
+  // dob: z.date({
+  //   required_error: "A date of birth is required.",
+  // }),
   language: z.string({
     required_error: "Please select a language.",
   }),
@@ -92,6 +93,7 @@ const defaultValues: Partial<AccountFormValues> = {
 }
 
 export function AccountForm() {
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
@@ -127,9 +129,10 @@ export function AccountForm() {
           )}
         />
       
-      <Button type="submit"><PasswordForm /></Button> 
+      
+      <PasswordForm />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           defaultValue={new Date("2023-01-23")}
           name="dob"
@@ -173,7 +176,7 @@ export function AccountForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         
         <FormField
           control={form.control}
