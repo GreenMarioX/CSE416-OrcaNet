@@ -69,12 +69,8 @@ export function TransferForm() {
   
     function onSubmit(data: AccountFormValues) {
       toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
+        title: "Transfer Notification",
+        description: "Your transfer settings have successfully been updated! A confirmation email has been sent to your email address.",
       })
     }
   

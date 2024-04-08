@@ -99,9 +99,9 @@ export function AccountForm() {
 
   function onSubmit(data: AccountFormValues) {
     toast({
-      title: "Heads up!",
-      description: "You can add components and dependencies to your app using the cli."
-    });
+      title: "Account Notification",
+      description: "Your account information has successfully been updated! A confirmation email has been sent to your email address.",
+    })
   }
 
   const { toast } = useToast();

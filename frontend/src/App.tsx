@@ -12,7 +12,7 @@ import DisplayPage from "./settings/display/DisplayPage";
 import TransferPage from "./settings/transfer/TransferPage";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
+import { Toaster } from "@/components/ui/toaster"
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
@@ -34,6 +34,7 @@ function App() {
             </Route>
           </Routes>
         </Router>
+        <Toaster />
       </div>
     </ThemeProvider>
   );
