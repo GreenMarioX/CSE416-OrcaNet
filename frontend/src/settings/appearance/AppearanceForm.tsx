@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -31,6 +31,7 @@ const appearanceFormSchema = z.object({
       required_error: "Please select a font.",
     }
   ),
+  pasteJSONThemeConfiguration: z.string(),
 });
 
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>;
@@ -164,6 +165,24 @@ export function AppearanceForm() {
             </FormItem>
           )}
         />
+
+          <FormField
+            defaultValue="Insert JSON theme here"
+            control={form.control}
+            name="pasteJSONThemeConfiguration"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Paste JSON Theme Configuration</FormLabel>
+                <FormControl>
+                    <Textarea placeholder="Insert JSON theme here" {...field} /> 
+                </FormControl> 
+                <FormDescription>
+                  Paste your JSON Theme Configuration here.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
         <Button type="submit">Update preferences</Button>
       </form>

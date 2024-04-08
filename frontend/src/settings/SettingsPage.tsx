@@ -19,10 +19,10 @@ const sidebarNavItems = [
     title: "Notifications",
     href: "/settings/notifications",
   },
-  {
-    title: "Display",
-    href: "/settings/display",
-  },
+  // {
+  //   title: "Display",
+  //   href: "/settings/display",
+  // },
   {
     title: "Transfer",
     href: "/settings/transfer",

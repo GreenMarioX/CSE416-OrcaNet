@@ -88,6 +88,7 @@ export function ProfileForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
+          defaultValue="Bubble Guppies"
           control={form.control}
           name="username"
           render={({ field }) => (
@@ -104,6 +105,7 @@ export function ProfileForm() {
           )}
         />
         <FormField
+          defaultValue="bubble.guppies@stonybrook.edu"
           control={form.control}
           name="email"
           render={({ field }) => (

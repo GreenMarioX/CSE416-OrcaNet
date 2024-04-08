@@ -12,18 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import { useToast } from "@/components/ui/use-toast"
 import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command"
 import {
   Form,
   FormControl,
@@ -40,14 +33,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 import { PasswordForm } from "./PasswordForm"
-
 const languages = [
   { label: "English", value: "en" },
   { label: "French", value: "fr" },
@@ -113,26 +99,24 @@ export function AccountForm() {
 
   function onSubmit(data: AccountFormValues) {
     toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+      title: "Heads up!",
+      description: "You can add components and dependencies to your app using the cli."
+    });
   }
 
+  const { toast } = useToast();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
+          defaultValue="Bubble Guppies"
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your name" {...field} />
+                <Input placeholder="Your name" {...field}/>
               </FormControl>
               <FormDescription>
                 This is the name that will be displayed on your profile and in
@@ -147,6 +131,7 @@ export function AccountForm() {
 
         <FormField
           control={form.control}
+          defaultValue={new Date("2023-01-23")}
           name="dob"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -192,6 +177,7 @@ export function AccountForm() {
         
         <FormField
           control={form.control}
+          defaultValue="English"
           name="language"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -200,7 +186,7 @@ export function AccountForm() {
               </FormLabel>
               <FormControl>
               <select
-                className="w-[250px] border-2 rounded-lg text-gray-700 text-sm p-2 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-[250px] border-2 rounded-lg text-foreground text-sm p-2 leading-tight focus:outline-none focus:shadow-outline bg-background"
                 value={field.value}
                 onChange={(e) => form.setValue("language", e.target.value)}
               >

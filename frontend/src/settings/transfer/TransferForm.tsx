@@ -51,7 +51,7 @@ const accountFormSchema = z.object({
         .refine(val => !isNaN(val) && val >= 2, { 
             message: "Seeding ratio limit must be at least 2.",
         }),
-    pasteJSONThemeConfiguration: z.string(),
+    //pasteJSONThemeConfiguration: z.string(),
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
@@ -147,7 +147,7 @@ export function TransferForm() {
           />
         </div>
 
-        <FormField
+        {/* <FormField
             control={form.control}
             name="pasteJSONThemeConfiguration"
             render={({ field }) => (
@@ -162,7 +162,7 @@ export function TransferForm() {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
           <Button type="submit">Update Transfer Settings</Button>
         </form>
       </Form>
