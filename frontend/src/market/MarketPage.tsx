@@ -47,9 +47,6 @@ const MarketPage = () => {
   const addJob = (hash: string) => {
     setJobInfoList((prev) => {
       const newList = [...prev];
-      // console.log(newList[prev.length-1]);
-      // console.log(parseInt(prev[-1].id) + 1);
-      // console.log((parseInt(prev[-1].id) + 1).toString());
       const date = new Date();
       newList.push({
         id: (parseInt(prev[prev.length - 1].id) + 1).toString(),
@@ -83,6 +80,10 @@ const MarketPage = () => {
           removeJobs={removeJobs}
           addJob={addJob}
         />
+        <hr
+          className="border mt-4 mb-4
+        "
+        ></hr>
         <Details
           jobInfo={
             selectedJobs.length > 0

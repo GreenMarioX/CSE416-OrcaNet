@@ -9,12 +9,13 @@ import { useContext } from "react";
 import { JobInfo, JobStatus, MarketPageContext } from "./MarketPage";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/use-toast";
+
 export const JobListHeader = (props: {
   sortOrder: string[][];
   setSortOrder: React.Dispatch<React.SetStateAction<string[][]>>;
 }) => {
   return (
-    <div className="flex items-center justify-between w-[calc(100%-1rem)] p-2 mb-2 rounded border">
+    <div className="flex items-center justify-between w-[calc(100%-1rem)] p-2 mb-3 rounded border">
       <div
         className="w-48 flex items-center justify-center"
         onClick={(e) => {
@@ -169,7 +170,6 @@ export const JobList = (props: {
         job.fileName.toLowerCase().includes(props.filter.toLowerCase()) ||
         props.filter === ""
     );
-  console.log(props.sortOrder);
   filteredJobs.sort((a, b) => {
     for (let sorting of props.sortOrder) {
       const multiplier = sorting[1] === "ascending" ? 1 : -1;
@@ -325,35 +325,38 @@ export const JobControls = (props: {
           toast({
             title: "File Download Resumed",
             description: "The file download has been resumed.",
-          })
+          });
         }}
       >
         <Play className="size-6 text-gray-500 hover:text-gray-800" />
       </button>
       <button
         onClick={() => {
-          props.updateJobStatuses("paused")
+          props.updateJobStatuses("paused");
           toast({
             title: "File Download Paused",
             description: "The file download has been paused.",
-          })
+          });
         }}
       >
         <Pause className="size-6 text-gray-500 hover:text-gray-800" />
       </button>
-      <button onClick={() => {props.removeJobs
-        toast({
-          variant: "destructive",
-          title: "File Download Cancelled",
-          description: "The file download has been cancelled.",
-        })
-      }}>
+      <button
+        onClick={() => {
+          props.removeJobs;
+          toast({
+            variant: "destructive",
+            title: "File Download Cancelled",
+            description: "The file download has been cancelled.",
+          });
+        }}
+      >
         <Trash2 className="size-6 text-gray-500 hover:text-destructive" />
       </button>
     </div>
   );
 };
-function statusToColorCSS(status: JobStatus): string {
+export function statusToColorCSS(status: JobStatus): string {
   switch (status) {
     case "downloading":
       return "stroke-green-500";

@@ -9,8 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
+} from "@/components/ui/dialog";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { DataTable } from "./DataTable";
 import fakeSeeds from "./fakeSeeds";
 import { Seed2, columns2 } from "./columns";
@@ -21,7 +21,7 @@ const OverviewHeader = (props: {
   addJob: (hash: string) => void;
 }) => {
   return (
-    <div className="flex justify-between mb-2">
+    <div className="flex justify-between">
       <div className="flex">
         <FilterInput setFilter={props.setFilter} />
         <Button className="ml-2" onClick={() => props.setStatusFilter("all")}>
@@ -82,10 +82,10 @@ const FilterInput = (props: {
 };
 
 const fakeData: Seed2[] = [
-  { name: "Alice", price: "30 USD", rate: "30 Mb/s"},
-  { name: "Bob", price: "35 USD", rate: "50 Mb/s"}
-]
-const DialogClose = DialogPrimitive.Close
+  { name: "Alice", price: "30 USD", rate: "30 Mb/s" },
+  { name: "Bob", price: "35 USD", rate: "50 Mb/s" },
+];
+const DialogClose = DialogPrimitive.Close;
 const AddJob = (props: { addJob: (hash: string) => void }) => {
   const [buffer, setBuffer] = useState("");
   const [validHash, setValidHash] = useState(0);
@@ -95,14 +95,13 @@ const AddJob = (props: { addJob: (hash: string) => void }) => {
   const resetAddJob = () => {
     setBuffer("");
     setValidHash(0);
-  }
+  };
 
   const handleSearchHash = () => {
     if (buffer === hash) {
       setValidHash(1);
       console.log("Hello");
-    }
-    else{
+    } else {
       setValidHash(-1);
     }
   };
@@ -112,14 +111,16 @@ const AddJob = (props: { addJob: (hash: string) => void }) => {
     toast({
       title: "Job Successfully Added!",
       description: "Your job has been successfully added!",
-    })
-  }
+    });
+  };
 
   return (
     <div>
       <Dialog>
         <DialogTrigger>
-          <Button onClick={resetAddJob} className="ml-20">Add Job</Button>
+          <Button onClick={resetAddJob} className="ml-20">
+            Add Job
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogTitle>Add Job</DialogTitle>
@@ -134,15 +135,18 @@ const AddJob = (props: { addJob: (hash: string) => void }) => {
             }}
             placeholder="File hash..."
           />
-          {validHash !== 1 && <Button onClick={handleSearchHash}>Search Hash</Button>}
+          {validHash !== 1 && (
+            <Button onClick={handleSearchHash}>Search Hash</Button>
+          )}
           {validHash === -1 && <p>No files match this hash</p>}
           {validHash === 1 && (
-          <>
-           <DataTable data={fakeData} columns={columns2}></DataTable>
-            <DialogClose>
-              <Button onClick={handleAddJob}>Select Peer</Button>
-            </DialogClose>
-          </>)}
+            <>
+              <DataTable data={fakeData} columns={columns2}></DataTable>
+              <DialogClose>
+                <Button onClick={handleAddJob}>Select Peer</Button>
+              </DialogClose>
+            </>
+          )}
         </DialogContent>
       </Dialog>
     </div>
