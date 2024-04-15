@@ -74,7 +74,7 @@ const MarketPage = () => {
     <MarketPageContext.Provider
       value={{ selectedJobs: selectedJobs, setSelectedJobs: setSelectedJobs }}
     >
-      <ScrollArea className="h-full">
+      <ScrollArea className="h-full grow">
         <div id="market-page" className="grow bg-background p-6">
           <Overview
             jobInfoList={jobInfoList}
