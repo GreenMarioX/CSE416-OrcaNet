@@ -37,97 +37,95 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-card border-r shadow-sm text-lg">
-        <div className="p-4 pb-2 flex justify-between items-center">
-          {/* <img
+    <nav className="h-full flex flex-col bg-card border-r shadow-sm text-lg">
+      <div className="p-4 pb-2 flex justify-between items-center">
+        {/* <img
             src={orcanetLogo}
             className={`overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
             }`}
             alt="OrcaNet"
           /> */}
-          <div
-            className={`font-bold text-3xl overflow-hidden transition-all ${
-              expanded ? "w-32" : "w-0"
-            }`}
-          >
-            OrcaNet
-          </div>
-          <button
-            onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg  hover:bg-gray-300 bg-gray-200 dark:bg-gray-600 text-foreground"
-          >
-            {expanded ? <ChevronFirst /> : <ChevronLast />}
-          </button>
+        <div
+          className={`font-bold text-3xl overflow-hidden transition-all ${
+            expanded ? "w-32" : "w-0"
+          }`}
+        >
+          OrcaNet
         </div>
+        <button
+          onClick={() => setExpanded((curr) => !curr)}
+          className="p-1.5 rounded-lg  hover:bg-gray-300 bg-gray-200 dark:bg-gray-600 text-foreground"
+        >
+          {expanded ? <ChevronFirst /> : <ChevronLast />}
+        </button>
+      </div>
 
-        <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3 text-nowrap">
-            <Link to="/">
-              <SidebarItem
-                icon={<LayoutDashboard />}
-                text="Home"
-                active={isActive("/")}
-                alert={false}
-              />
-            </Link>
-            <Link to="/store">
-              <SidebarItem
-                icon={<Package />}
-                text="Store"
-                active={isActive("/store")}
-                alert={false}
-              />
-            </Link>
-            <Link to="/market">
-              <SidebarItem
-                icon={<BarChart2 />}
-                text="Market"
-                active={isActive("/market")}
-                alert={false}
-              />
-            </Link>
-            <Link to="/wallet">
-              <SidebarItem
-                icon={<Receipt />}
-                text="Wallet"
-                active={isActive("/wallet")}
-                alert={false}
-              />
-            </Link>
-            <Link to="/settings/profile">
-              <SidebarItem
-                icon={<Settings />}
-                text="Settings"
-                active={isSettingsActive()}
-                alert={false}
-              />
-            </Link>
-          </ul>
-        </SidebarContext.Provider>
+      <SidebarContext.Provider value={{ expanded }}>
+        <ul className="flex-1 px-3 text-nowrap">
+          <Link to="/">
+            <SidebarItem
+              icon={<LayoutDashboard />}
+              text="Home"
+              active={isActive("/")}
+              alert={false}
+            />
+          </Link>
+          <Link to="/store">
+            <SidebarItem
+              icon={<Package />}
+              text="Store"
+              active={isActive("/store")}
+              alert={false}
+            />
+          </Link>
+          <Link to="/market">
+            <SidebarItem
+              icon={<BarChart2 />}
+              text="Market"
+              active={isActive("/market")}
+              alert={false}
+            />
+          </Link>
+          <Link to="/wallet">
+            <SidebarItem
+              icon={<Receipt />}
+              text="Wallet"
+              active={isActive("/wallet")}
+              alert={false}
+            />
+          </Link>
+          <Link to="/settings/profile">
+            <SidebarItem
+              icon={<Settings />}
+              text="Settings"
+              active={isSettingsActive()}
+              alert={false}
+            />
+          </Link>
+        </ul>
+      </SidebarContext.Provider>
 
-        <div className="border-t flex p-3">
-          <img
-            src="https://ui-avatars.com/api/?background=CBC3E3&name=Bubble+Guppies"
-            alt=""
-            className="w-10 h-10 rounded-md"
-          />
-          <div
-            className={`
+      <div className="border-t flex p-3">
+        <img
+          src="https://ui-avatars.com/api/?background=CBC3E3&name=Bubble+Guppies"
+          alt=""
+          className="w-10 h-10 rounded-md"
+        />
+        <div
+          className={`
               flex justify-between items-center
               overflow-hidden transition-all ${expanded ? "w-32 ml-3" : "w-0"}
           `}
-          >
-            <div className="leading-4">
-              <h4 className="font-semibold">Bubble Guppies</h4>
-              <span className="text-xs text-gray-600"></span>
-            </div>
-            <MoreVertical size={20} />
+        >
+          <div className="leading-4">
+            <h4 className="font-semibold">Bubble Guppies</h4>
+            <span className="text-xs text-gray-600"></span>
           </div>
+          <MoreVertical size={20} />
         </div>
-      </nav>
-    </aside>
+      </div>
+    </nav>
   );
 };
 

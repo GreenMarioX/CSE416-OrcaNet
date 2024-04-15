@@ -231,7 +231,7 @@ export const JobList = (props: {
     return 0;
   });
   return (
-    <ScrollArea className="h-[25rem]">
+    <ScrollArea className="h-[35vh]">
       <ul className="w-[calc(100%-1rem)]">
         {filteredJobs.map((e) => (
           <Job key={e.id} {...e} />

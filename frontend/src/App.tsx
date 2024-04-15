@@ -12,11 +12,11 @@ import DisplayPage from "./settings/display/DisplayPage";
 import TransferPage from "./settings/transfer/TransferPage";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-      <div id="App" className="flex overflow-hidden">
+      <div id="App" className="flex overflow-hidden w-screen h-screen">
         <Router>
           <Sidebar />
           <Routes>

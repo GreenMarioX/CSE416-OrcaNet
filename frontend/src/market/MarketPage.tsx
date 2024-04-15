@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import Overview from "./Overview";
 import Details from "./Details";
 import memory from "./fakeJobs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export interface JobInfo {
   id: string;
@@ -73,37 +74,36 @@ const MarketPage = () => {
     <MarketPageContext.Provider
       value={{ selectedJobs: selectedJobs, setSelectedJobs: setSelectedJobs }}
     >
-      <div id="market-page" className="relative grow bg-background p-6">
-        <Overview
-          jobInfoList={jobInfoList}
-          updateJobStatuses={updateJobStatuses}
-          removeJobs={removeJobs}
-          addJob={addJob}
-        />
-        <hr
-          className="border mt-4 mb-4
-        "
-        ></hr>
-        <Details
-          jobInfo={
-            selectedJobs.length > 0
-              ? jobInfoList.filter((e) => e.id === selectedJobs[0])[0]
-              : {
-                  id: "-1",
-                  fileName: "MissingNo",
-                  fileSize: "-1 KiB",
-                  status: "completed",
-                  remainingTime: "-1 s",
-                  timeQueued: "9999-99-99 99:99:99",
+      <ScrollArea className="h-full">
+        <div id="market-page" className="grow bg-background p-6">
+          <Overview
+            jobInfoList={jobInfoList}
+            updateJobStatuses={updateJobStatuses}
+            removeJobs={removeJobs}
+            addJob={addJob}
+          />
+          <hr className="border mt-4 mb-4" />
+          <Details
+            jobInfo={
+              selectedJobs.length > 0
+                ? jobInfoList.filter((e) => e.id === selectedJobs[0])[0]
+                : {
+                    id: "-1",
+                    fileName: "MissingNo",
+                    fileSize: "-1 KiB",
+                    status: "completed",
+                    remainingTime: "-1 s",
+                    timeQueued: "9999-99-99 99:99:99",
 
-                  hash: "OnGnIsSiM",
-                  accumulatedData: "-1",
-                  runningCost: "-1 USD",
-                  projectedCost: "-1 USD",
-                }
-          }
-        />
-      </div>
+                    hash: "OnGnIsSiM",
+                    accumulatedData: "-1",
+                    runningCost: "-1 USD",
+                    projectedCost: "-1 USD",
+                  }
+            }
+          />
+        </div>
+      </ScrollArea>
     </MarketPageContext.Provider>
   );
 };

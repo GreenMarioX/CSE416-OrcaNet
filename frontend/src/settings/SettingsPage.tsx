@@ -1,7 +1,14 @@
-import React from 'react';
-import { Separator } from "@/components/ui/separator"
-import { SidebarNav } from "./components/SidebarNav"
-import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
+import React from "react";
+import { Separator } from "@/components/ui/separator";
+import { SidebarNav } from "./components/SidebarNav";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Outlet,
+} from "react-router-dom";
+import { ScrollArea } from "@/components/ui/scroll-area";
 const sidebarNavItems = [
   {
     title: "Profile",
@@ -27,7 +34,7 @@ const sidebarNavItems = [
     title: "Transfer",
     href: "/settings/transfer",
   },
-]
+];
 
 interface SettingsLayoutProps {
   children: React.ReactNode;
@@ -35,26 +42,12 @@ interface SettingsLayoutProps {
 
 export default function SettingsPage() {
   return (
-    <>
-      {/* <div className="md:hidden">
-      <img
-          src="/examples/forms-light.png"
-          width="1280"
-          height="791"
-          alt="Forms"
-          className="block dark:hidden"
-        />
-        <img
-          src="/examples/forms-dark.png"
-          width="1280"
-          height="791"
-          alt="Forms"
-          className="hidden dark:block"
-        />
-      </div> */}
+    <ScrollArea className="grow h-full">
       <div className="space-y-6 p-10 pb-16 md:block">
         <div className="space-y-0.5">
-          <h2 className="text-2xl font-bold tracking-tight">OrcaNet Settings</h2>
+          <h2 className="text-2xl font-bold tracking-tight">
+            OrcaNet Settings
+          </h2>
           <p className="text-muted-foreground">
             Manage your account settings and set e-mail preferences.
           </p>
@@ -65,10 +58,8 @@ export default function SettingsPage() {
             <SidebarNav items={sidebarNavItems} />
           </aside>
           <Outlet />
-
-          
         </div>
       </div>
-    </>
-  )
+    </ScrollArea>
+  );
 }
